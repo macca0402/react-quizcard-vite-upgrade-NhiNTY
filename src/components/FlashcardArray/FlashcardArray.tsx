@@ -11,6 +11,8 @@ import Return from "../Button/Return.tsx";
 import Maximize from "../Button/Maximize.tsx";
 import Next from "../Button/Next.tsx";
 import ShowCount from "../ShowCount/ShowCount.tsx";
+import Progress from "../ProgressStudy/Progress.tsx";
+
 
 function FlashcardArray({
                             cards,
@@ -37,7 +39,8 @@ function FlashcardArray({
                             },
                             onSound = () => {
                             },
-                            showCount = true
+                            showCount = true,
+                            styleProgress
                         }: FlashcardArrayProps) {
     const [cardNumber, setCardNumber] = useState(0);
     const [numberRecall, setNumberRecall] = useState(0);
@@ -264,12 +267,10 @@ function FlashcardArray({
     }, [numberRecall, numberRemember]);
     return (
         <div className="FlashcardArrayWrapper" style={FlashcardArrayStyle}>
-            <div>
-                nho :{numberRemember}
-            </div>
-            <div>
-                chua nho :{numberRecall}
-            </div>
+            {
+                onStudy&&
+                <Progress totalRecall={numberRecall} totalRemember={numberRemember} styleProgress={styleProgress}/>
+            }
             <div
                 className="FlashcardArrayWrapper__CardHolder"
                 style={{overflow: isOverFlow}}

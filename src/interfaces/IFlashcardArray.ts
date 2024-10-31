@@ -41,4 +41,5 @@ export default interface FlashcardArrayProps {
   onProgressStudy?: (newRemember: number, newRecall: number) => void;
   onUpdateCards?: (newCards: object[]) => void;
   onSound?: (content:string) => void;
+  styleProgress?: React.CSSProperties;
 }
