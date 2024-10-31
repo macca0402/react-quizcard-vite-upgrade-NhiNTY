@@ -1,7 +1,10 @@
 import './App.css'
 import FlashcardArray from "./components/FlashcardArray/FlashcardArray.tsx";
+import {useState} from "react";
 
 function App() {
+    const [totalRemember,setTotalRemember] = useState(0);
+    const [totalRecall,setTotalRecall] = useState(0);
 
     const cards = [
         {
@@ -40,10 +43,18 @@ function App() {
             backHTML: <>Phoenix</>,
         },
     ];
-
+    const handleProgressStudy = (newRemember: number, newRecall: number) => {
+            console.log(newRemember, newRecall);
+            setTotalRecall(newRecall);
+            setTotalRemember(newRemember);
+    }
     return (
         <div>
-            <FlashcardArray onStudy={true} cards={cards}/>
+            <div>
+                chua nho:{totalRecall}
+                nho :{totalRemember}
+            </div>
+            <FlashcardArray onProgressStudy={handleProgressStudy} onStudy={true} cards={cards}/>
         </div>
     );
 }

@@ -42,7 +42,7 @@ function FlashcardArray({
     const [cardNumber, setCardNumber] = useState(0);
     const [numberRecall, setNumberRecall] = useState(0);
     const [numberRemember, setNumberRemember] = useState(0);
-    const currentCard = cards[cardNumber];
+    // const currentCard = cards[cardNumber];
 
     const [updateCards, setUpdateCards] = useState(
         cards.map((card) => ({...card, mark: false})) // Khởi tạo mark cho từng thẻ
@@ -191,52 +191,90 @@ function FlashcardArray({
             forwardRef.current.resetArray = resetArray;
         }
     });
-
     const handleRecall = () => {
+        console.log(cards);
         let newRecall = 0;
+        const currentCardIndex = cardNumber;
+        const currentCard = updateCards[currentCardIndex]; // Use the updated cards array
         const isRemembered = currentCard.isRemembered;
 
-        if (isRemembered === undefined || isRemembered === true) {
-            currentCard.isRemembered = false;
-            setNumberRecall(prev => {
+        if (isRemembered !== false) {
+
+            const updatedCard = {...currentCard, isRemembered: false};
+
+            setUpdateCards((prevCards) =>
+                prevCards.map((card, index) =>
+                    index === currentCardIndex ? updatedCard : card
+                )
+            );
+
+            setNumberRecall((prev) => {
                 newRecall = prev + 1;
                 return newRecall;
             });
 
             if (isRemembered === true && numberRemember > 0) {
-                setNumberRemember(prev => prev - 1);
+                setNumberRemember((prev) => prev - 1);
             }
+
         }
+
         nextCard();
     };
 
     const handleRemember = () => {
+        console.log(cards);
         let newRemember = 0;
+        const currentCardIndex = cardNumber;
+        const currentCard = updateCards[currentCardIndex]; // Use the updated cards array
         const isRemembered = currentCard.isRemembered;
 
-        if (isRemembered === undefined || isRemembered === false) {
-            currentCard.isRemembered = true;
-            setNumberRemember(prev => {
+        if (isRemembered !== true) {
+
+            const updatedCard = {...currentCard, isRemembered: true};
+
+            setUpdateCards((prevCards) =>
+                prevCards.map((card, index) =>
+                    index === currentCardIndex ? updatedCard : card
+                )
+            );
+
+            setNumberRemember((prev) => {
                 newRemember = prev + 1;
                 return newRemember;
             });
 
             if (isRemembered === false && numberRecall > 0) {
-                setNumberRecall(prev => prev - 1);
+                setNumberRecall((prev) => prev - 1);
             }
+
         }
+
         nextCard();
     };
+
+    useEffect(() => {
+        console.log('recal:', numberRecall);
+        console.log("rremebe:", numberRemember);
+        onProgressStudy(numberRemember, numberRecall);
+    }, [numberRecall, numberRemember]);
 
     useEffect(() => {
         onProgressStudy(numberRemember, numberRecall);
     }, [numberRecall, numberRemember]);
     return (
         <div className="FlashcardArrayWrapper" style={FlashcardArrayStyle}>
+            <div>
+                nho :{numberRemember}
+            </div>
+            <div>
+                chua nho :{numberRecall}
+            </div>
             <div
                 className="FlashcardArrayWrapper__CardHolder"
                 style={{overflow: isOverFlow}}
             >
+
                 {cardsInDisplay[0] !== -1
                     ? cardsList[cardsInDisplay[0]]
                     : placeFillerCard}
@@ -244,8 +282,6 @@ function FlashcardArray({
                 {cardsInDisplay[2] !== -1
                     ? cardsList[cardsInDisplay[2]]
                     : placeFillerCard}
-
-
             </div>
             {(onStudy) && (
                 <div className="FlashcardArrayWrapper__controls">
