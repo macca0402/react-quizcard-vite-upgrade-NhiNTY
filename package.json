@@ -1,7 +1,7 @@
 {
   "author": "NhiNTY",
-  "name": "react-quizcard-vite",
-  "version": "1.0.0",
+  "name": "react-quizcard-vite-nhi",
+  "version": "1.0.1",
   "private": false,
   "type": "module",
   "main": "dist/index.js",
