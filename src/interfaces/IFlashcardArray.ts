@@ -33,8 +33,6 @@ export default interface FlashcardArrayProps {
   onCardFlip?: (id: number, index: number, state: boolean) => void;
   currentCardFlipRef?: React.MutableRefObject<() => void> | { current: null };
   cycle?: boolean;
-
-
   onStudy?: boolean;
   minimize?: () => void;
   maximize?: () => void;
