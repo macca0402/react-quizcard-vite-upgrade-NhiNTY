@@ -3,9 +3,9 @@ import FlashcardProps from "../../interfaces/IFlashcard";
 import "./Flashcard.scss";
 import {Modal, Button} from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
-import Star from "../Button/Star.tsx";
+import Star from "../Button/Star";
 import ReactDOMServer from 'react-dom/server';
-import TextEditor from "../TextEditor/TextEditor.tsx";
+import TextEditor from "../TextEditor/TextEditor";
 import {htmlToText} from "html-to-text";
 
 function Flashcard({

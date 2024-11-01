@@ -1,7 +1,21 @@
 {
-  "files": [],
-  "references": [
-    { "path": "./tsconfig.app.json" },
-    { "path": "./tsconfig.node.json" }
+  "compilerOptions": {
+    "target": "es6", // hoặc "esnext" tùy vào dự án của bạn
+    "module": "commonjs", // hoặc "esnext" tùy thuộc vào cách bạn muốn xuất mô-đun
+    "jsx": "react-jsx", // Sử dụng "react" cho các phiên bản cũ hơn
+    "strict": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "outDir": "./dist",
+    "rootDir": "./src",
+    "declaration": true
+  },
+  "include": [
+    "src/**/*"
+  ],
+  "exclude": [
+    "node_modules",
+    "**/*.spec.ts"
   ]
 }

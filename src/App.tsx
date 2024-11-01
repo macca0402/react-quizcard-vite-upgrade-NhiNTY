@@ -1,11 +1,6 @@
 import './App.css'
-import FlashcardArray from "./components/FlashcardArray/FlashcardArray.tsx";
-// import {useState} from "react";
-
+import FlashcardArray from "../src/components/FlashcardArray/FlashcardArray"
 function App() {
-    // const [totalRemember,setTotalRemember] = useState(0);
-    // const [totalRecall,setTotalRecall] = useState(0);
-
     const cards = [
         {
             id: 1,
@@ -45,8 +40,6 @@ function App() {
     ];
     const handleProgressStudy = (newRemember: number, newRecall: number) => {
             console.log(newRemember, newRecall);
-            // setTotalRecall(newRecall);
-            // setTotalRemember(newRemember);
     }
     return (
         <div>
